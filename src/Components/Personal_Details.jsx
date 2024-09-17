@@ -1,154 +1,121 @@
-import React, { useState } from 'react'
-import { Button, Checkbox, Form, Input } from 'antd';
-const onFinish = (values) => {
-    console.log('Success:', values);
-};
-const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-};
-export default function Personal_Details() {
+import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import "../Style.css/Personal.css"
+import { Progress } from 'antd';
+import { toast, ToastContainer } from 'react-toastify';
 
-    const [fname, setFname] = useState('')
-    const [lname, setLname] = useState('')
-    const [phone, setPhone] = useState('')
-    const [email, setEmail] = useState('')
-    const [github, setGithub] = useState('')
-    const [linkedin, setLinkedin] = useState('')
+const RegistrationForm = () => {
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const fnameInputRef = useRef(null);
+    const lnameInputRef = useRef(null);
+    const PhoneInputRef = useRef(null);
+    const EmailInputRef = useRef(null);
+    const GithubInputRef = useRef(null);
+    const LinkedInInputRef = useRef(null);
 
-        localStorage.setItem('Fname', fname);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        // Perform registration logic here
+        const fname = fnameInputRef.current.value;
+        const email = EmailInputRef.current.value;
+        const phone = PhoneInputRef.current.value;
+        const lname = lnameInputRef.current.value;
+        const Github = GithubInputRef.current.value;
+        const LinkedIn = LinkedInInputRef.current.value;
+
+        localStorage.setItem('fname', fname);
         localStorage.setItem('lname', lname);
         localStorage.setItem('phone', phone);
         localStorage.setItem('email', email);
-        localStorage.setItem('github', github);
-        localStorage.setItem('linkedin', linkedin);
-        
-        
+        localStorage.setItem('Github', Github);
+        localStorage.setItem('LinkedIn', LinkedIn);
 
+        console.log(fname, lname, phone, email);
+        navigate('/final');
+
+    };
+
+    const ResetBtn = () => {
+        fnameInputRef.current.value = '';
+        EmailInputRef.current.value = '';
+        PhoneInputRef.current.value = '';
+
+        lnameInputRef.current.value = '';
+        GithubInputRef.current.value = '';
+        LinkedInInputRef.current.value = '';
+        localStorage.clear();
+
+        toast.success("Reset Successfully !", {
+            position: "top-right"
+        });
     }
+
     return (
-        <div>
-            <Form
-                name="basic"
-                onSubmit={handleSubmit}
-                className=' flex justify-center flex-col items-center w-[60%] mx-auto '
-                initialValues={{
-                    remember: true,
-                }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
-            >
+        <div className='defaultShadow w-[100%] mx-auto p-5 my-10'>
 
-                <div className=' flex items-center justify-between px-3 '>
-                    <Form.Item
-                        label="First Name"
-                        name="fanme"
-                        value={fname}
-                        onMetaChange={(e) => setFname(e.target.change)}
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your First Name!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
 
-                    <Form.Item
-                        label="Last Name"
-                        name="username"
-                        value={lname}
-                        onMetaChange={(e) => setLname(e.target.change)}
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your last Name!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
+            <div className=' flex  justify-around  '>
+
+                <div className="left  py-2 px-6 text-center ">
+                    <h1 className=' my-2 text-2xl font-semibold text-gray-600 mb-2 '>Step</h1>
+                    <hr />
+
+                    <div className=' flex flex-col '>
+                        <Progress type="circle" className='my-5' percent={0} />
+                        <button className=' bg-green-500 text-white hover:bg-green-700 p-6 rounded-xl ' onClick={ResetBtn}>Reset</button>
+                    </div>
+
                 </div>
 
-                <div className=' flex items-center justify-between px-3 '>
-                    <Form.Item
-                        label="Phone Number"
-                        name="Phone"
-                        value={phone}
-                        onMetaChange={(e) => setPhone(e.target.change)}
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Phone No!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
+                <div className="right  py-2 px-6">
+                    <form onSubmit={handleSubmit} className=' flex flex-col items-center'>
+                        <div className=' flex justify-around items-center '>
+                            <div className=' mx-4 '>
+                                <label htmlFor="">First Name</label>
+                                <input required className='inputField my-2 mx-5 ' placeholder="Enter First Name" ref={fnameInputRef} type='text' />
+                            </div>
 
-                    <Form.Item
-                        label="Email Id"
-                        name="Email Id"
-                        value={email}
-                        onMetaChange={(e) => setEmail(e.target.change)}
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Email!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
+                            <div className=' mx-4 '>
+                                <label htmlFor="">Last Name</label>
+                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Last Name" ref={lnameInputRef} type='text' />
+                            </div>
+
+                        </div>
+                        <div className=' flex justify-around items-center '>
+                            <div className=' mx-4 '>
+                                <label htmlFor="">Phone Number</label>
+                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Phone" ref={PhoneInputRef} type='number' />
+                            </div>
+
+                            <div className=' mx-4 '>
+                                <label htmlFor="">Email Id</label>
+                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Email" ref={EmailInputRef} type='email' />
+                            </div>
+                        </div>
+
+                        <div className=' flex justify-around items-center '>
+                            <div className=' mx-4 '>
+                                <label htmlFor="">Github URL</label>
+                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Github" ref={GithubInputRef} type='text' />
+
+                            </div>
+
+                            <div className=' mx-4 '>
+                                <label htmlFor="">Linkedin</label>
+                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Linkedin" ref={LinkedInInputRef} type='text' />
+                            </div>
+                        </div>
+
+
+                        <button type="submit" className='button1 my-10 '>Next></button>
+                        <ToastContainer />
+                    </form>
                 </div>
-
-                <div className=' flex items-center justify-between px-3 '>
-                    <Form.Item
-                        label="Github URL"
-                        name="Github"
-                        value={github}
-                        onMetaChange={(e) => setGithub(e.target.change)}
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Github link!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Linkedin"
-                        name="Linkedin"
-                        value={linkedin}
-                        onMetaChange={(e) => setLinkedin(e.target.change)}
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input Linkedin!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                </div>
-
-                <Form.Item
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                >
-                    <Button className=' my-10 ' type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
+            </div>
         </div>
-    )
-}
+    );
+};
+
+export default RegistrationForm;

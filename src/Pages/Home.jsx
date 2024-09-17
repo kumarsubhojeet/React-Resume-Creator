@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
 
-    <section className=' w-[80%] mx-auto p-5 border-2 my-10'>
+    <section className=''>
       <Personal_Details />
     </section>
     </>
