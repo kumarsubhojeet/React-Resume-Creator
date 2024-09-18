@@ -33,7 +33,7 @@ const RegistrationForm = () => {
         localStorage.setItem('LinkedIn', LinkedIn);
 
         console.log(fname, lname, phone, email);
-        navigate('/final');
+        navigate('/summary');
 
     };
 
@@ -59,7 +59,7 @@ const RegistrationForm = () => {
             <div className=' flex  justify-around  '>
 
                 <div className="left  py-2 px-6 text-center ">
-                    <h1 className=' my-2 text-2xl font-semibold text-gray-600 mb-2 '>Step</h1>
+                    <h1 className=' my-2 text-2xl font-semibold text-gray-600 mb-2 '>Step 1</h1>
                     <hr />
 
                     <div className=' flex flex-col '>
@@ -69,44 +69,45 @@ const RegistrationForm = () => {
 
                 </div>
 
-                <div className="right  py-2 px-6">
+                <div className="right  ">
                     <form onSubmit={handleSubmit} className=' flex flex-col items-center'>
-                        <div className=' flex justify-around items-center '>
-                            <div className=' mx-4 '>
-                                <label htmlFor="">First Name</label>
-                                <input required className='inputField my-2 mx-5 ' placeholder="Enter First Name" ref={fnameInputRef} type='text' />
-                            </div>
+                        <div className=' flex items-center justify-start text-left'>
+                            <div className=' flex items-end flex-col '>
+                                <div className=''>
+                                    <label htmlFor="">First Name</label>
+                                    <input required className='inputField my-2 mx-5 ' placeholder="Enter First Name" ref={fnameInputRef} type='text' />
+                                </div>
 
-                            <div className=' mx-4 '>
-                                <label htmlFor="">Last Name</label>
-                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Last Name" ref={lnameInputRef} type='text' />
-                            </div>
+                                <div className=''>
+                                    <label htmlFor="">Phone Number</label>
+                                    <input required className='inputField my-2 mx-5 ' placeholder="Enter Phone" ref={PhoneInputRef} type='number' />
+                                </div>
 
+                                <div className=''>
+                                    <label htmlFor="">Github URL</label>
+                                    <input required className='inputField my-2 mx-5 ' placeholder="Enter Github" ref={GithubInputRef} type='text' />
+
+                                </div>
+
+                            </div>
+                            <div className=' flex items-end flex-col'>
+
+                                <div className=' '>
+                                    <label htmlFor="">Last Name</label>
+                                    <input required className='inputField my-2 mx-5 ' placeholder="Enter Last Name" ref={lnameInputRef} type='text' />
+                                </div>
+                                <div className=' '>
+                                    <label htmlFor="">Email Id</label>
+                                    <input required className='inputField my-2 mx-5 ' placeholder="Enter Email" ref={EmailInputRef} type='email' />
+                                </div>
+                                <div className=' '>
+                                    <label htmlFor="">Linkedin URL</label>
+                                    <input required className='inputField my-2 mx-5 ' placeholder="Enter Linkedin" ref={LinkedInInputRef} type='text' />
+                                </div>
+
+                            </div>
                         </div>
-                        <div className=' flex justify-around items-center '>
-                            <div className=' mx-4 '>
-                                <label htmlFor="">Phone Number</label>
-                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Phone" ref={PhoneInputRef} type='number' />
-                            </div>
 
-                            <div className=' mx-4 '>
-                                <label htmlFor="">Email Id</label>
-                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Email" ref={EmailInputRef} type='email' />
-                            </div>
-                        </div>
-
-                        <div className=' flex justify-around items-center '>
-                            <div className=' mx-4 '>
-                                <label htmlFor="">Github URL</label>
-                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Github" ref={GithubInputRef} type='text' />
-
-                            </div>
-
-                            <div className=' mx-4 '>
-                                <label htmlFor="">Linkedin</label>
-                                <input required className='inputField my-2 mx-5 ' placeholder="Enter Linkedin" ref={LinkedInInputRef} type='text' />
-                            </div>
-                        </div>
 
 
                         <button type="submit" className='button1 my-10 '>Next></button>
